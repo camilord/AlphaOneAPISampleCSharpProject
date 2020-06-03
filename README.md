@@ -5,3 +5,8 @@ AlphaOne API Sample project on how to authenticate, communicate and retrieve dat
  - Console App (.NET Framework)
  - .NET Framework 4.7.2
  - Visual Studio 2019 Community Edition
+ 
+### Nuget Package Dependencies
+ - Flurl 2.8.2
+ - Flurl.Http 2.4.2
+ - Newtonsoft.Json 12.0.2
