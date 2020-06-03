@@ -13,19 +13,26 @@ namespace AlphaOneAPISampleProject
 
         static void Main(string[] args)
         {
+            /**
+             * instantiate the AuthenticateEntity to store your credentials
+             * for the AlphaOne API
+             */
             AuthenticateEntity authEntity = new AuthenticateEntity();
             authEntity.setBaseUrl("https://council-api.abcs.co.nz");
             authEntity.setUsername("ACCOUNT_HERE");
             authEntity.setPassword("SECRET_KEY_HERE");
 
-            AuthenticationService auth = new AuthenticationService();
-            auth.setAuthenticateEntity(authEntity);
+            /**
+             * instantiate auth service then start authenticating
+             */
+            AuthenticationService auth = new AuthenticationService(authEntity);
 
             /**
              * You have 3 Authentication types to choose
              *  - using nuget package Flurl.Http
              *  - using HttpClient class
              *  - lastly using WebRequest
+             *  
              * by default, its set to Flurl.Http
              */
             // auth.setAuthenticationType(AuthenticationService.AUTH_TYPE_FLURL);
@@ -39,7 +46,8 @@ namespace AlphaOneAPISampleProject
             AuthenticationResponse result = JsonConvert.DeserializeObject<AuthenticationResponse>(response);
 
             /**
-             * this will be the access class you need to use to fetch the project list or details
+             * this will be the access class you need to use 
+             * to fetch the project list or details
              */
             AUTHORIZATION = new AuthorizationEntity(
                 authEntity.getBaseUrl(),
@@ -47,31 +55,21 @@ namespace AlphaOneAPISampleProject
                 result.session_key
             );
 
-
             /**
-             * Demonstration on fetching the list of ACCEPTED projects
+             * instantiate ProjectListService class and get the project list
+             * based on different options like
+             *  - accepted project list
+             *  - list of projects based on forms
+             *    - like BC granted/issued form
+             *    - CCC issued
+             *    - VRFI/RFI/IR finalised
+             *  - alpha-goget integration project list
+             *  
+             *  view the class and will give you bunch of options 
+             *  to get the project list
              */
-            AcceptedProjectList AcceptedListObj = new AcceptedProjectList(AUTHORIZATION);
-            ProjectListResponse project_list = AcceptedListObj.getList();
-            Console.WriteLine(project_list.ToString());
-
-            /**
-             * Demonstration on fetching the list of Project Ready by Form projects
-             * in this case, i specify to fetch all BC granted/issued only
-             */
-            ProjectReadyList ReadyListObj = new ProjectReadyList(
-                AUTHORIZATION, 
-                AlphaOneAPILibrary.Common.APIConstants.BuildingConsent
-            );
-            project_list = ReadyListObj.getList();
-            Console.WriteLine(project_list.ToString());
-
-            /**
-             * Demonstration on fetching the list of ALPHA-GOGET Integration API Project List
-             */
-            AlphaGoProjectList agListObj = new AlphaGoProjectList(AUTHORIZATION);
-            project_list = agListObj.getList();
-            Console.WriteLine(project_list.ToString());
+            ProjectListService list = new ProjectListService(AUTHORIZATION);
+            Console.WriteLine(list.getAcceptedProjectList());
         }
     }
 }

@@ -18,14 +18,14 @@ namespace AlphaOneAPISampleProject.AlphaOneAPILibrary
         private static String AUTH_TYPE = "flurl";
         private static AuthenticateEntity authEntity;
 
+        public AuthenticationService(AuthenticateEntity auth)
+        {
+            authEntity = auth;
+        }
+
         public void setAuthenticationType(String auth_type)
         {
             AUTH_TYPE = auth_type;
-        }
-
-        public void setAuthenticateEntity(AuthenticateEntity auth)
-        {
-            authEntity = auth;
         }
 
         public String Authenticate()
