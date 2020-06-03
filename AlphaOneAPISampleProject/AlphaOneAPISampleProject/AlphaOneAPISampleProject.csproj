@@ -33,6 +33,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Flurl, Version=2.8.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Flurl.2.8.2\lib\net40\Flurl.dll</HintPath>
+    </Reference>
+    <Reference Include="Flurl.Http, Version=2.4.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Flurl.Http.2.4.2\lib\net46\Flurl.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,11 +52,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlphaOneAPILibrary\Common\APIConstants.cs" />
+    <Compile Include="AlphaOneAPILibrary\Authentications\AuthenticationInterface.cs" />
+    <Compile Include="AlphaOneAPILibrary\Authentications\FlurlAuthentication.cs" />
+    <Compile Include="AlphaOneAPILibrary\Authentications\HttpClientAuthentication.cs" />
+    <Compile Include="AlphaOneAPILibrary\Authentications\WebRequestAuthentication.cs" />
+    <Compile Include="AlphaOneAPILibrary\Entity\AuthenticateEntity.cs" />
+    <Compile Include="AlphaOneAPILibrary\AuthenticationService.cs" />
+    <Compile Include="AlphaOneAPILibrary\Entity\AuthorizationEntity.cs" />
+    <Compile Include="AlphaOneAPILibrary\ProjectList\AcceptedProjectList.cs" />
+    <Compile Include="AlphaOneAPILibrary\ProjectList\AlphaGoProjectList.cs" />
+    <Compile Include="AlphaOneAPILibrary\ProjectList\ProjectList.cs" />
+    <Compile Include="AlphaOneAPILibrary\ProjectList\ProjectListInterface.cs" />
+    <Compile Include="AlphaOneAPILibrary\ProjectList\ProjectReadyList.cs" />
+    <Compile Include="AlphaOneAPILibrary\Response\AuthenticationResponse.cs" />
+    <Compile Include="AlphaOneAPILibrary\Response\Objects\DataObject.cs" />
+    <Compile Include="AlphaOneAPILibrary\Response\Objects\ProjectListItemObject.cs" />
+    <Compile Include="AlphaOneAPILibrary\Response\ProjectListResponse.cs" />
+    <Compile Include="AlphaOneAPILibrary\Util\WebRequestUtil.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
