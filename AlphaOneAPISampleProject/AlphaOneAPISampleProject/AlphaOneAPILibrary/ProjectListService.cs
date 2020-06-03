@@ -26,77 +26,52 @@ namespace AlphaOneAPISampleProject.AlphaOneAPILibrary
          * Demonstration on fetching the list of Project Ready by Form projects
          * in this case, i specify to fetch all BC granted/issued only
          */
-        public ProjectListResponse getAcceptedProjectListOnBC()
+        public ProjectListResponse getProjectReadyListOnBC()
         {
-            ProjectReadyList ReadyListObj = new ProjectReadyList(
-                authorizationEntity,
-                Common.APIConstants.BuildingConsent
-            );
-            ProjectListResponse project_list = ReadyListObj.getList();
-            return project_list;
+            return getProjectReadyListOn(Common.APIConstants.BuildingConsent);
         }
 
         /**
          * Demonstration on fetching the list of Project Ready by Form projects
          * in this case, i specify to fetch all CCC issued only
          */
-        public ProjectListResponse getAcceptedProjectListOnCCC()
+        public ProjectListResponse getProjectReadyListOnCCC()
         {
-            ProjectReadyList ReadyListObj = new ProjectReadyList(
-                authorizationEntity,
-                Common.APIConstants.CodeComplianceCertificate
-            );
-            ProjectListResponse project_list = ReadyListObj.getList();
-            return project_list;
+            return getProjectReadyListOn(Common.APIConstants.CodeComplianceCertificate);
         }
 
         /**
          * Demonstration on fetching the list of Project Ready by Form projects
          * in this case, i specify to fetch all VRFI granted only
          */
-        public ProjectListResponse getAcceptedProjectListOnVRFI()
+        public ProjectListResponse getProjectReadyListOnVRFI()
         {
-            ProjectReadyList ReadyListObj = new ProjectReadyList(
-                authorizationEntity,
-                Common.APIConstants.VRFI
-            );
-            ProjectListResponse project_list = ReadyListObj.getList();
-            return project_list;
+            return getProjectReadyListOn(Common.APIConstants.VRFI);
         }
 
         /**
          * Demonstration on fetching the list of Project Ready by Form projects
          * in this case, i specify to fetch all RFI granted only
          */
-        public ProjectListResponse getAcceptedProjectListOnRFI()
+        public ProjectListResponse getProjectReadyListOnRFI()
         {
-            ProjectReadyList ReadyListObj = new ProjectReadyList(
-                authorizationEntity,
-                Common.APIConstants.RFI
-            );
-            ProjectListResponse project_list = ReadyListObj.getList();
-            return project_list;
+            return getProjectReadyListOn(Common.APIConstants.RFI);
         }
 
         /**
          * Demonstration on fetching the list of Project Ready by Form projects
          * in this case, i specify to fetch all IR granted only
          */
-        public ProjectListResponse getAcceptedProjectListOnIR()
+        public ProjectListResponse getProjectReadyListOnIR()
         {
-            ProjectReadyList ReadyListObj = new ProjectReadyList(
-                authorizationEntity,
-                Common.APIConstants.InspectionReport
-            );
-            ProjectListResponse project_list = ReadyListObj.getList();
-            return project_list;
+            return getProjectReadyListOn(Common.APIConstants.InspectionReport);
         }
 
         /**
          * Demonstration on fetching the list of Project Ready by Form projects
          * in this case, i specify to fetch all specific form granted only
          */
-        public ProjectListResponse getAcceptedProjectListOn(string formID = "all")
+        public ProjectListResponse getProjectReadyListOn(string formID = "all")
         {
             ProjectReadyList ReadyListObj = new ProjectReadyList(
                 authorizationEntity,
