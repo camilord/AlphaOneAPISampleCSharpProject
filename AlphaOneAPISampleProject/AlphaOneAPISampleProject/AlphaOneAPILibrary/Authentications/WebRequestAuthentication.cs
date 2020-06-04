@@ -3,6 +3,8 @@ using System;
 using System.Net;
 using System.Text;
 using System.IO;
+using AlphaOneAPISampleProject.AlphaOneAPILibrary.Util;
+using System.Collections.Generic;
 
 namespace AlphaOneAPISampleProject.AlphaOneAPILibrary.Authentications
 {
@@ -18,7 +20,16 @@ namespace AlphaOneAPISampleProject.AlphaOneAPILibrary.Authentications
 
         public void Authenticate()
         {
+            WebRequestUtil wrUtil = new WebRequestUtil(new AuthorizationEntity("", "", ""));
+
+            Dictionary<string, string> post_data = new Dictionary<string, string>();
+            post_data.Add("username", authEntity.getUsername());
+            post_data.Add("key", authEntity.getPassword());
+
             String url = (authEntity.getBaseUrl() + "/v1/authenticate");
+            webResponse = wrUtil.postRequest(url, post_data);
+
+            /*String url = (authEntity.getBaseUrl() + "/v1/authenticate");
             WebRequest request = WebRequest.Create(url);
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
@@ -40,7 +51,7 @@ namespace AlphaOneAPISampleProject.AlphaOneAPILibrary.Authentications
             StreamReader sr = new StreamReader(request.GetResponse().GetResponseStream());
             string Result = sr.ReadToEnd();
 
-            webResponse = Result.ToString();
+            webResponse = Result.ToString();*/
         }
 
         public String getResponse()

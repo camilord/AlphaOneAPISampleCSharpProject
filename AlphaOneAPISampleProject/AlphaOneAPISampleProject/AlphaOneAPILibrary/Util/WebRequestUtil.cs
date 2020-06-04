@@ -44,11 +44,11 @@ namespace AlphaOneAPISampleProject.AlphaOneAPILibrary.Util
                 // do something with entry.Value or entry.Key
                 if (ctr == 0)
                 {
-                    formData.AppendFormat("{0}={1}", entry.Key, entry.Value);
+                    formData.AppendFormat("{0}={1}", entry.Key.ToString(), entry.Value.ToString());
                 }
                 else
                 {
-                    formData.AppendFormat("&{0}={1}", entry.Key, entry.Value);
+                    formData.AppendFormat("&{0}={1}", entry.Key.ToString(), entry.Value.ToString());
                 }
                 ctr++;
             }
@@ -61,23 +61,38 @@ namespace AlphaOneAPISampleProject.AlphaOneAPILibrary.Util
 
             WebRequest request = WebRequest.Create(url);
             request.Method = method_request;
+            /**
+             * dont add content-type header on authenticate
+             */
+            if (!url.Contains("/authenticate"))
+            {
+                WebHeaderCollection whc = new WebHeaderCollection();
+                whc.Add("Auth-username", authorizationEntity.getUsername());
+                whc.Add("Auth-session-key", authorizationEntity.getSessionKey());
+                request.Headers = whc;
+            }
             request.ContentType = "application/x-www-form-urlencoded";
-
-            WebHeaderCollection whc = new WebHeaderCollection();
-            whc.Add("Auth-username", authorizationEntity.getUsername());
-            whc.Add("Auth-session-key", authorizationEntity.getSessionKey());
-            request.Headers = whc;
 
             if (method_request.ToUpper() == "POST")
             {
                 Stream stream = request.GetRequestStream();
-                byte[] postArray = Encoding.ASCII.GetBytes(flatten_post_data);
+                byte[] postArray = Encoding.UTF8.GetBytes(flatten_post_data);
                 stream.Write(postArray, 0, postArray.Length);
                 stream.Close();
-            }           
+            }
 
-            StreamReader sr = new StreamReader(request.GetResponse().GetResponseStream());
-            string Result = sr.ReadToEnd();
+            string Result;
+            try
+            {
+                //Console.WriteLine(request.Headers.ToString());
+                StreamReader sr = new StreamReader(request.GetResponse().GetResponseStream());
+                Result = sr.ReadToEnd();
+            } catch(WebException e)
+            {
+                Console.WriteLine(e.Message);
+                Result = "[]";
+            }
+            
 
             String wrResponse = Result.ToString();
             return wrResponse;

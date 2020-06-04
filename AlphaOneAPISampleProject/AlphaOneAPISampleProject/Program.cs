@@ -1,7 +1,9 @@
 ﻿using AlphaOneAPISampleProject.AlphaOneAPILibrary;
+using AlphaOneAPISampleProject.AlphaOneAPILibrary.Common;
 using AlphaOneAPISampleProject.AlphaOneAPILibrary.Entity;
 using AlphaOneAPISampleProject.AlphaOneAPILibrary.ProjectList;
 using AlphaOneAPISampleProject.AlphaOneAPILibrary.Response;
+using AlphaOneAPISampleProject.AlphaOneAPILibrary.Response.Objects;
 using Newtonsoft.Json;
 using System;
 
@@ -13,14 +15,16 @@ namespace AlphaOneAPISampleProject
 
         static void Main(string[] args)
         {
+            AppConfigService configService = new AppConfigService();
+            AppConfig config = configService.getConfiguration();
             /**
              * instantiate the AuthenticateEntity to store your credentials
              * for the AlphaOne API
              */
             AuthenticateEntity authEntity = new AuthenticateEntity();
-            authEntity.setBaseUrl("https://council-api.abcs.co.nz");
-            authEntity.setUsername("ACCOUNT_HERE");
-            authEntity.setPassword("SECRET_KEY_HERE");
+            authEntity.setBaseUrl(config.api_base_url);
+            authEntity.setUsername(config.username);
+            authEntity.setPassword(config.password);
 
             /**
              * instantiate auth service then start authenticating
@@ -37,10 +41,10 @@ namespace AlphaOneAPISampleProject
              */
             // auth.setAuthenticationType(AuthenticationService.AUTH_TYPE_FLURL);
             // auth.setAuthenticationType(AuthenticationService.AUTH_TYPE_HTTP_CLIENT);
-            // auth.setAuthenticationType(AuthenticationService.AUTH_TYPE_WEB_REQUEST);
+            auth.setAuthenticationType(AuthenticationService.AUTH_TYPE_WEB_REQUEST);
 
             String response = auth.Authenticate();
-            Console.WriteLine(response);
+            Console.WriteLine(response + "\n");
 
             // convert json string to object
             AuthenticationResponse result = JsonConvert.DeserializeObject<AuthenticationResponse>(response);
@@ -69,7 +73,32 @@ namespace AlphaOneAPISampleProject
              *  to get the project list
              */
             ProjectListService list = new ProjectListService(AUTHORIZATION);
-            Console.WriteLine(list.getAcceptedProjectList());
+            ProjectListResponse objResponse = list.getAcceptedProjectList();
+            Console.WriteLine("Total Projects: " + objResponse.Data.TotalProjects + "\n");
+
+            if (objResponse.Data.List.Length > 0)
+            {
+                foreach(ProjectListItemObject item in objResponse.Data.List)
+                {
+                    Console.WriteLine("AlphaID: " + item.AlphaID);
+                    Console.WriteLine("ConsentID: " + item.ConsentNumber);
+                    Console.WriteLine("Flag: " + item.ApplicationFlag);
+                    Console.WriteLine("RequestKey: " + item.RequestKey);
+
+                    Console.WriteLine("\nMarking as done ...");
+                    MarkResponse markResponse = list.markAcceptedProjectAsDone(item.AlphaID, item.ApplicationFlag, item.RequestKey);
+                    
+                    Console.WriteLine("\tResult: " + markResponse.Result);
+                    Console.WriteLine("\tMessage: " + markResponse.Message);
+                    Console.WriteLine("\tTimestamp: " + markResponse.Timestamp);
+                    if (markResponse.Result == "true")
+                    {
+                        Console.WriteLine("\tResponseID: " + markResponse.ResponseID);
+                    }
+                    
+                    break;
+                }
+            }
         }
     }
 }

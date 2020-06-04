@@ -52,20 +52,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlphaOneAPILibrary\AppConfigService.cs" />
     <Compile Include="AlphaOneAPILibrary\Common\APIConstants.cs" />
     <Compile Include="AlphaOneAPILibrary\Authentications\AuthenticationInterface.cs" />
     <Compile Include="AlphaOneAPILibrary\Authentications\FlurlAuthentication.cs" />
     <Compile Include="AlphaOneAPILibrary\Authentications\HttpClientAuthentication.cs" />
     <Compile Include="AlphaOneAPILibrary\Authentications\WebRequestAuthentication.cs" />
+    <Compile Include="AlphaOneAPILibrary\Common\AppConfig.cs" />
     <Compile Include="AlphaOneAPILibrary\Entity\AuthenticateEntity.cs" />
     <Compile Include="AlphaOneAPILibrary\AuthenticationService.cs" />
     <Compile Include="AlphaOneAPILibrary\Entity\AuthorizationEntity.cs" />
+    <Compile Include="AlphaOneAPILibrary\ProjectListService.cs" />
     <Compile Include="AlphaOneAPILibrary\ProjectList\AcceptedProjectList.cs" />
     <Compile Include="AlphaOneAPILibrary\ProjectList\AlphaGoProjectList.cs" />
     <Compile Include="AlphaOneAPILibrary\ProjectList\ProjectList.cs" />
     <Compile Include="AlphaOneAPILibrary\ProjectList\ProjectListInterface.cs" />
     <Compile Include="AlphaOneAPILibrary\ProjectList\ProjectReadyList.cs" />
     <Compile Include="AlphaOneAPILibrary\Response\AuthenticationResponse.cs" />
+    <Compile Include="AlphaOneAPILibrary\Response\CommonResponse.cs" />
+    <Compile Include="AlphaOneAPILibrary\Response\MarkResponse.cs" />
     <Compile Include="AlphaOneAPILibrary\Response\Objects\DataObject.cs" />
     <Compile Include="AlphaOneAPILibrary\Response\Objects\ProjectListItemObject.cs" />
     <Compile Include="AlphaOneAPILibrary\Response\ProjectListResponse.cs" />
@@ -75,6 +80,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="AppConfig.json.dist" />
+    <None Include="AppConfig.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

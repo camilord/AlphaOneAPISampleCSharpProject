@@ -1,6 +1,8 @@
 ﻿using AlphaOneAPISampleProject.AlphaOneAPILibrary.Entity;
 using AlphaOneAPISampleProject.AlphaOneAPILibrary.ProjectList;
 using AlphaOneAPISampleProject.AlphaOneAPILibrary.Response;
+using Newtonsoft.Json;
+using System;
 
 namespace AlphaOneAPISampleProject.AlphaOneAPILibrary
 {
@@ -89,6 +91,36 @@ namespace AlphaOneAPISampleProject.AlphaOneAPILibrary
             AlphaGoProjectList agListObj = new AlphaGoProjectList(authorizationEntity);
             ProjectListResponse project_list = agListObj.getList();
             return project_list;
+        }
+
+        /**
+         * mark accepted project as done
+         */
+        public MarkResponse markAcceptedProjectAsDone(String alpha_id, String flag, String request_key)
+        {
+            AcceptedProjectList obj = new AcceptedProjectList(authorizationEntity);
+            MarkResponse objResponse = obj.markDone(alpha_id, flag, request_key);
+            return objResponse;
+        }
+
+        /**
+         * mark accepted project as done
+         */
+        public MarkResponse markAlphaGoProjectAsDone(String alpha_id, String flag, String request_key)
+        {
+            AlphaGoProjectList obj = new AlphaGoProjectList(authorizationEntity);
+            MarkResponse objResponse = obj.markDone(alpha_id, flag, request_key);
+            return objResponse;
+        }
+
+        /**
+         * mark accepted project as done
+         */
+        public MarkResponse markProjectReadyAsDone(String alpha_id, String flag, String request_key)
+        {
+            ProjectReadyList obj = new ProjectReadyList(authorizationEntity);
+            MarkResponse objResponse = obj.markDone(alpha_id, flag, request_key);
+            return objResponse;
         }
     }
 }
