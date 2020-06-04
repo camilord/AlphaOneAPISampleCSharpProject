@@ -11,4 +11,4 @@ AlphaOne API Sample project on how to authenticate, communicate and retrieve dat
  - Flurl.Http 2.4.2
  - Newtonsoft.Json 12.0.2
 
- If you have questions, please email support@abcs.co.nz
+ If you have questions, please email support(at)abcs.co.nz
