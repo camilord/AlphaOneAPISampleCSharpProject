@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30128.74
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlphaOneAPISampleProject", "AlphaOneAPISampleProject\AlphaOneAPISampleProject.csproj", "{5F2FD9D5-C137-4D45-9E72-21F10D8245B9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlphaOneAPISampleProjectTest", "AlphaOneAPISampleProjectTest\AlphaOneAPISampleProjectTest.csproj", "{76FDF2F4-509B-4550-B13A-C4E4EC96570B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{5F2FD9D5-C137-4D45-9E72-21F10D8245B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F2FD9D5-C137-4D45-9E72-21F10D8245B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F2FD9D5-C137-4D45-9E72-21F10D8245B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76FDF2F4-509B-4550-B13A-C4E4EC96570B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76FDF2F4-509B-4550-B13A-C4E4EC96570B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76FDF2F4-509B-4550-B13A-C4E4EC96570B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76FDF2F4-509B-4550-B13A-C4E4EC96570B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

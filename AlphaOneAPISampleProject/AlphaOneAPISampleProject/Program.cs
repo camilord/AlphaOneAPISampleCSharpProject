@@ -75,6 +75,7 @@ namespace AlphaOneAPISampleProject
             ProjectListService list = new ProjectListService(AUTHORIZATION);
             ProjectListResponse objResponse = list.getAcceptedProjectList();
             Console.WriteLine("Total Projects: " + objResponse.Data.TotalProjects + "\n");
+            MarkResponse markResponse;
 
             if (objResponse.Data.List.Length > 0)
             {
@@ -86,7 +87,7 @@ namespace AlphaOneAPISampleProject
                     Console.WriteLine("RequestKey: " + item.RequestKey);
 
                     Console.WriteLine("\nMarking as done ...");
-                    MarkResponse markResponse = list.markAcceptedProjectAsDone(item.AlphaID, item.ApplicationFlag, item.RequestKey);
+                    markResponse = list.markAcceptedProjectAsDone(item.AlphaID, item.ApplicationFlag, item.RequestKey);
                     
                     Console.WriteLine("\tResult: " + markResponse.Result);
                     Console.WriteLine("\tMessage: " + markResponse.Message);
@@ -96,6 +97,38 @@ namespace AlphaOneAPISampleProject
                         Console.WriteLine("\tResponseID: " + markResponse.ResponseID);
                     }
                     
+                    break;
+                }
+            }
+
+            Console.WriteLine("\n\nTesting on ALPHAONE-GOCOUNCIL ...\n\n\n");
+
+            /**
+             * AlphaOne-GoCouncil Integration Sample
+             */
+            objResponse = list.getAlphaGoProjectList();
+            Console.WriteLine("Total Projects: " + objResponse.Data.TotalProjects + "\n");
+
+            if (objResponse.Data.List.Length > 0)
+            {
+                foreach (ProjectListItemObject item in objResponse.Data.List)
+                {
+                    Console.WriteLine("AlphaID: " + item.AlphaID);
+                    Console.WriteLine("ConsentID: " + item.ConsentNumber);
+                    Console.WriteLine("Flag: " + item.ApplicationFlag);
+                    Console.WriteLine("RequestKey: " + item.RequestKey);
+
+                    Console.WriteLine("\nMarking as done ...");
+                    markResponse = list.markAlphaGoProjectAsDone(item.AlphaID, item.ApplicationFlag, item.RequestKey);
+
+                    Console.WriteLine("\tResult: " + markResponse.Result);
+                    Console.WriteLine("\tMessage: " + markResponse.Message);
+                    Console.WriteLine("\tTimestamp: " + markResponse.Timestamp);
+                    if (markResponse.Result == "true")
+                    {
+                        Console.WriteLine("\tResponseID: " + markResponse.ResponseID);
+                    }
+
                     break;
                 }
             }
